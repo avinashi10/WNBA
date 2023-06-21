@@ -1,12 +1,12 @@
 const express = require('express');
 const mongoose = require("mongoose");
-const Word = require('./db.js');
+const Team = require('./db.js');
 
 module.exports = {
   //create function
-  createInDb: (word, cb) => {
-    var formatWord = { name: word.name, definition: word.definition };
-    Word.create(word)
+  createInDb: (team, cb) => {
+    var formatTeam = { name: team.name, city: team.city };
+    Team.create(formatTeam)
     .then((response) => {
       cb(null, response);
     })
@@ -18,7 +18,7 @@ module.exports = {
   //get all function
   getAllFromDb: (cb) => {
     //use .find with an empty object as the first filter parameter
-    Word.find({}, (err, data) => {
+    Team.find({}, (err, data) => {
       if (err) {
         cb(err);
       } else {
@@ -29,15 +29,15 @@ module.exports = {
   },
 
   //update function
-  updateInDb: (word, cb) => {
-    var query = { name: word.name };
+  updateInDb: (team, cb) => {
+    var query = { name: team.name };
     var update = {
-      name: word.newName,
-      definition: word.newDefinition
+      name: team.newName,
+      city: team.newCity
     };
     console.log('QUERY VAR: ', query);
     console.log('UPDATE VAR: ', update);
-    Word.findOneAndUpdate(query, update,(err, response) => {
+    Team.findOneAndUpdate(query, update,(err, response) => {
         if (err) {
           cb(err);
         } else {
@@ -47,9 +47,9 @@ module.exports = {
   },
 
   //delete function
-  deleteFromDb: (word, cb) => {
-    var query = { name: word.name };
-    Word.findOneAndDelete(query, (err, response) => {
+  deleteFromDb: (team, cb) => {
+    var query = { name: team.name };
+    Team.findOneAndDelete(query, (err, response) => {
         if (err) {
           cb(err);
         } else {
