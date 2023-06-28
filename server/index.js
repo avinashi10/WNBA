@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const path = require("path");
 
@@ -23,5 +22,5 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 //send requests to routes
 app.use('', router);
 
-app.listen(3000);
-console.log("Listening at http://localhost:3000");
+app.listen(3001);
+console.log("Listening at http://localhost:3001");
